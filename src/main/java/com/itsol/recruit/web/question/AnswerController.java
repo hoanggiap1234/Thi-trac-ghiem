@@ -1,11 +1,11 @@
 package com.itsol.recruit.web.question;
 
 import com.itsol.recruit.core.Constants;
-import com.itsol.recruit.dto.AnsweredDTO;
+import com.itsol.recruit.dto.TestResultDTO;
 import com.itsol.recruit.entity.Answer;
-import com.itsol.recruit.entity.Answersed;
+import com.itsol.recruit.entity.TestResult;
 import com.itsol.recruit.service.IAnswerService;
-import com.itsol.recruit.service.IAnsweredService;
+import com.itsol.recruit.service.ITestResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,9 +22,9 @@ public class AnswerController {
 
     private final IAnswerService iAnswerService;
 
-    private final IAnsweredService itestExcutedService;
+    private final ITestResultService itestExcutedService;
 
-    public AnswerController(IAnswerService iAnswerService, IAnsweredService itestExcutedService) {
+    public AnswerController(IAnswerService iAnswerService, ITestResultService itestExcutedService) {
         this.iAnswerService = iAnswerService;
         this.itestExcutedService = itestExcutedService;
     }
@@ -35,7 +35,7 @@ public class AnswerController {
         log.debug("REST request to save answer : {}", answer);
 
         if (answer.getId() != null) {
-            return null;
+            return ResponseEntity.badRequest().body("id is not null, not insert to database !");
         }
 
         Answer result = iAnswerService.createAnswerForEachQuestion(answer);
@@ -43,15 +43,15 @@ public class AnswerController {
     }
 
     @PostMapping("/test")
-    public ResponseEntity<?> testExcuted(@RequestBody AnsweredDTO examp) {
+    public ResponseEntity<?> testExcuted(@RequestBody TestResultDTO examp) {
 
         log.debug("REST request to save examp : {}", examp);
 
         if (examp.getEmail() == null) {
-            return null;
+            return ResponseEntity.badRequest().body("email is null or empty");
         }
 
-        Answersed result = itestExcutedService.postExam(examp);
-        return ResponseEntity.ok().body(result);
+        Boolean result = itestExcutedService.postExam(examp);
+        return ResponseEntity.ok().body("success");
     }
 }

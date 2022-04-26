@@ -1,6 +1,7 @@
 package com.itsol.recruit.web.question;
 
 import com.itsol.recruit.core.Constants;
+import com.itsol.recruit.dto.QuestionDTO;
 import com.itsol.recruit.entity.Question;
 import com.itsol.recruit.service.IQuestionService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,24 +28,21 @@ public class QuestionController {
         this.iQuestionService = iQuestionService;
     }
 
+    // lay danh sach cau hoi cac dap an
     @GetMapping("/questions")
-    public ResponseEntity<Page<Question>> getAllQuestions(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Question> pageData = iQuestionService.getAllQuestion(pageable);
-
-        return ResponseEntity.ok().body(pageData);
+    public ResponseEntity<List<QuestionDTO>> getAllQuestions(){
+        List<QuestionDTO> listData = iQuestionService.getAllQuestion();
+        return ResponseEntity.ok().body(listData);
     }
 
+    // them cau hoi va danh sach cac dap an
     @PostMapping("/questions")
-    public ResponseEntity<?> createQuestion(@RequestBody Question question){
+    public ResponseEntity<?> createQuestion(@RequestBody Question question) {
 
         log.debug("REST request to save question : {}", question);
 
         if (question.getId() != null) {
-            return  null;
+            return ResponseEntity.badRequest().body("id question is not null, not insert to database");
         }
 
         Question result = iQuestionService.createQuestion(question);

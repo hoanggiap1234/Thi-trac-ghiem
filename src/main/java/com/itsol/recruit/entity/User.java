@@ -4,12 +4,10 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import java.util.UUID;
 
 @Entity(name = "Users")
 @Data

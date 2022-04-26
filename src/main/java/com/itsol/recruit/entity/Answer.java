@@ -1,5 +1,6 @@
 package com.itsol.recruit.entity;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "answers")
@@ -27,15 +29,15 @@ public class Answer {
     @Type(type="org.hibernate.type.UUIDCharType")
     UUID id;
 
-    @ManyToOne(fetch = FetchType.EAGER )
-    @JoinColumn(name = "question_id")
-    Question question;
-
-    @Column(name = "expected_answer")
-    String expectedAnswer;
+    @Column(name = "answer")
+    String answer;
 
     @Column(name = "corect_answer")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     Boolean corectAnswer;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    Question question;
 
 }
