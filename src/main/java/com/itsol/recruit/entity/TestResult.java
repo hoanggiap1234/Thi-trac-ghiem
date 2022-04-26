@@ -9,15 +9,16 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "answersed")
+@Entity(name = "test_result")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Answersed {
+public class TestResult {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,15 +30,15 @@ public class Answersed {
     @Type(type="org.hibernate.type.UUIDCharType")
     UUID id;
 
+    @Column(name = "time_accepted")
+    Timestamp time;
+
     @ManyToOne(fetch = FetchType.EAGER )
     @JoinColumn(name = "user_id")
     User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "test_result",
-            joinColumns = @JoinColumn(name = "result_id"),
-            inverseJoinColumns = @JoinColumn(name = "answer_id")
-    )
-    List<Answer> answers;
+    @ManyToOne(fetch = FetchType.EAGER )
+    @JoinColumn(name = "answer_id")
+    Answer answer;
+
 }
