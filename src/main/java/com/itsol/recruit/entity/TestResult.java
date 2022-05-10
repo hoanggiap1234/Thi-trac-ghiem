@@ -31,7 +31,7 @@ public class TestResult {
     UUID id;
 
     @Column(name = "time_accepted")
-    Timestamp time;
+    Long time;
 
     @ManyToOne(fetch = FetchType.EAGER )
     @JoinColumn(name = "user_id")

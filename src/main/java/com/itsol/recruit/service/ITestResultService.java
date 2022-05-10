@@ -1,8 +1,17 @@
 package com.itsol.recruit.service;
 
-import com.itsol.recruit.dto.TestResultDTO;
+import com.itsol.recruit.dto.ResultStatisticDTO;
+import com.itsol.recruit.dto.TestResultVM;
+import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
+@Service
 public interface ITestResultService {
     // gửi kết quả bài thi trắc nghiệm
-    Boolean postExam(TestResultDTO answeredDTO);
+    UUID postExam(TestResultVM answeredDTO);
+
+    ResultStatisticDTO getResultTest(String userid);
+
+
 }

@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ITestResultRepositoryJPA extends JpaRepository<TestResult, UUID> {
+
 }

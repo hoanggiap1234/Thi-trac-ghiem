@@ -1,7 +1,7 @@
 package com.itsol.recruit.web.question;
 
 import com.itsol.recruit.core.Constants;
-import com.itsol.recruit.dto.TestResultDTO;
+import com.itsol.recruit.dto.TestResultVM;
 import com.itsol.recruit.entity.Answer;
 import com.itsol.recruit.entity.TestResult;
 import com.itsol.recruit.service.IAnswerService;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = Constants.Api.Path.PUBLIC)
@@ -43,7 +45,7 @@ public class AnswerController {
     }
 
     @PostMapping("/test")
-    public ResponseEntity<?> testExcuted(@RequestBody TestResultDTO examp) {
+    public ResponseEntity<?> testExcuted(@Valid @RequestBody TestResultVM examp) {
 
         log.debug("REST request to save examp : {}", examp);
 
@@ -51,7 +53,7 @@ public class AnswerController {
             return ResponseEntity.badRequest().body("email is null or empty");
         }
 
-        Boolean result = itestExcutedService.postExam(examp);
-        return ResponseEntity.ok().body("success");
+        UUID userId = itestExcutedService.postExam(examp);
+        return ResponseEntity.ok().body(userId);
     }
 }
