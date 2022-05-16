@@ -1,6 +1,5 @@
 package com.itsol.recruit.entity;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

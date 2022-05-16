@@ -1,17 +1,16 @@
 package com.itsol.recruit.web.question;
 
 import com.itsol.recruit.core.Constants;
+import com.itsol.recruit.core.MyMessageInterpolator;
 import com.itsol.recruit.dto.TestResultVM;
 import com.itsol.recruit.entity.Answer;
 import com.itsol.recruit.entity.TestResult;
+import com.itsol.recruit.entity.User;
 import com.itsol.recruit.service.IAnswerService;
 import com.itsol.recruit.service.ITestResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -19,5 +19,7 @@ public class QuestionDTO {
     String description;
 
     List<AnswerDTO> answerDTOS;
+    AnswerDTO yourAnswer;
+
 
 }

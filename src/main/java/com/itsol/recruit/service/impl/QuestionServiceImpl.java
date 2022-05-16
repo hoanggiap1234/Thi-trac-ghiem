@@ -39,7 +39,6 @@ public class QuestionServiceImpl implements IQuestionService {
                 AnswerDTO answerDTO = new AnswerDTO();
                 answerDTO.setId(answers.get(j).getId());
                 answerDTO.setAnswer(answers.get(j).getAnswer());
-                answerDTO.setCorectAnswer(answers.get(j).getCorectAnswer());
                 answerDTOs.add(answerDTO);
             }
             questionDTO.setAnswerDTOS(answerDTOs);

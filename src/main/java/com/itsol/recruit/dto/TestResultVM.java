@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class TestResultVM {
@@ -18,10 +19,10 @@ public class TestResultVM {
 
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$")
+    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "phone is invalid")
     String mobile;
 
     @NotNull
-    List<Answer> answers;
+    List<UUID> answerIDs;
 
 }

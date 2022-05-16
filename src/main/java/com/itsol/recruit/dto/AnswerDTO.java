@@ -12,6 +12,4 @@ public class AnswerDTO {
     UUID id;
 
     String answer;
-
-    Boolean corectAnswer;
 }
