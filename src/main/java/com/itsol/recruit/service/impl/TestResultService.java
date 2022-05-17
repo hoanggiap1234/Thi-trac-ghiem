@@ -22,11 +22,8 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class TestResultService implements ITestResultService {
-
     private  final UserRepositoryJPA userRepositoryJPA;
-
     private  final IAnswerRepositoryJPA iAnswerRepositoryJPA;
-
     private final ITestResultRepositoryJPA iTestResultRepositoryJPA;
 
     private  final IQuestionRepositoryJPA iQuestionRepositoryJPA;
@@ -45,22 +42,15 @@ public class TestResultService implements ITestResultService {
     public UUID postExam(TestResultVM testResultDTO) {
         Date timeAccepted = new Date();
         try {
-            // check email and birthday
-            Optional<User> user = userRepositoryJPA.findByEmail(testResultDTO.getEmail());
-            // check idAnswer tồn tại không.
-            List<UUID> answersID = testResultDTO.getAnswerIDs();
-            answersID.stream().forEach(answerId -> {
-                if (!iAnswerRepositoryJPA.existsById(answerId)) {
-                    log.error("id is not exits");
-                    return;
-                }
-            });
+
             List<TestResult> testResults = new ArrayList<>();
             for (int i = 0; i < testResultDTO.getAnswerIDs().size(); i++) {
+                Optional<User> user = userRepositoryJPA.findByEmail(testResultDTO.getEmail());
                 TestResult testResult = new TestResult();
                 testResult.setTime(timeAccepted.getTime());
                 Answer answer = iAnswerRepositoryJPA.findById(testResultDTO.getAnswerIDs().get(i)).get();
                 testResult.setAnswer(answer);
+                // check email
                 if (!user.isPresent()) {
                     User newUser = new User();
                     newUser.setEmail(testResultDTO.getEmail());
@@ -81,7 +71,6 @@ public class TestResultService implements ITestResultService {
             return null;
         }
     }
-
     @Override
     public ResultStatisticDTO getResultTest(String userId) {
         Integer numberCorrect = 0;
@@ -200,6 +189,5 @@ public class TestResultService implements ITestResultService {
        }
         return  check;
     }
-
 
 }
