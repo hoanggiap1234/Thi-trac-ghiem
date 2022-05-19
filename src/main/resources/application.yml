@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
 #    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/test_java
-    username: test_java
-    password: 123456
+    url: jdbc:postgresql://ec2-44-195-169-163.compute-1.amazonaws.com:5432/de91b1uedkv5m8
+    username: fgjjfaprcttbhp
+    password: 06e45f25bf57470f62cc53aadcaab3aa9238e495847bb6d6056c975a5a968731
 #    hikari:
 #      poolName: Hikari
 #      auto-commit: false
